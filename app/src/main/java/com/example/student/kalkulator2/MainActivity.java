@@ -17,9 +17,9 @@ import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Queue<String> values = new LinkedList<String>();
     private TextView outputResult = null;
     private TextView inputExpression = null;
+    private  CalculatorMath calculatorMath = new CalculatorMath();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         outputResult = (TextView) findViewById(R.id.outputResult);
         inputExpression = (TextView) findViewById(R.id.inputExpression);
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
@@ -48,36 +40,25 @@ public class MainActivity extends AppCompatActivity {
         String value = ((Button) view).getText().toString();
 //        Toast.makeText(MainActivity.this, ((Button) view).getText().toString(),
 //                Toast.LENGTH_LONG).show();
-        inputExpression.setText(inputExpression.getText() + " " + value);
-        values.add(value);
+        inputExpression.setText(inputExpression.getText() + value);
+        calculatorMath.createNumber(value);
     }
     public void buttonFunctionClick(View view){
         String value = ((Button) view).getText().toString();
 //        Toast.makeText(MainActivity.this, value + " func",
 //                Toast.LENGTH_LONG).show();
-        inputExpression.setText(inputExpression.getText() + " " + value);
-        values.add(value);
+        inputExpression.setText(inputExpression.getText() + " " + value + " ");
+        calculatorMath.setNumber();
+        calculatorMath.setOperand(value);
+    }
+    public void buttonClearClick(View view){
+        calculatorMath.clear();
+        inputExpression.setText("");
+        outputResult.setText("");
     }
     public void buttonEqualsClick(View view){
-        Toast.makeText(MainActivity.this, values.toString(),
-                Toast.LENGTH_LONG).show();
-        int buffer = 0;
-        String lastOperand = "";
-        for(String v : values){
-            int number = 0;
-            try{
-                number = Integer.parseInt(v);
-            }
-            catch (Exception ex){
-                if(v == "+"){
-                    lastOperand = v;
-                }
-            }
-            if(number != 0){
-                buffer += number;
-            }
-            lastOperand = "";
-        }
+        calculatorMath.setNumber();
+        outputResult.setText(String.format("%.2f", calculatorMath.calculate()));
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
