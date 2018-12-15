@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -17,21 +18,24 @@ import java.util.Queue;
 public class MainActivity extends AppCompatActivity {
 
     private Queue<String> values = new LinkedList<String>();
+    private TextView outputResult = null;
+    private TextView inputExpression = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        outputResult = (TextView) findViewById(R.id.outputResult);
+        inputExpression = (TextView) findViewById(R.id.inputExpression);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
     @Override
@@ -42,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
     }
     public void buttonNumberClick(View view){
         String value = ((Button) view).getText().toString();
-        Toast.makeText(MainActivity.this, ((Button) view).getText().toString(),
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, ((Button) view).getText().toString(),
+//                Toast.LENGTH_LONG).show();
+        inputExpression.setText(inputExpression.getText() + " " + value);
         values.add(value);
     }
     public void buttonFunctionClick(View view){
         String value = ((Button) view).getText().toString();
-        Toast.makeText(MainActivity.this, value + " func",
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, value + " func",
+//                Toast.LENGTH_LONG).show();
+        inputExpression.setText(inputExpression.getText() + " " + value);
         values.add(value);
     }
     public void buttonEqualsClick(View view){
