@@ -18,13 +18,17 @@ public class CalculatorMath {
             numberDbl = Double.parseDouble(buffor);
         }
         catch (Exception ex){ }
-        if(operand.length() < 1 && firstNumber == 0.0){
-            firstNumber = numberDbl;
-        }
-        else {
-            secondNumber = numberDbl;
+        if(firstNumber == 0.0 || secondNumber == 0.0) {
+            if (operand.length() < 1 && firstNumber == 0.0) {
+                firstNumber = numberDbl;
+            } else {
+                secondNumber = numberDbl;
+            }
         }
         buffor = "";
+    }
+    public double getSecondNumber(){
+        return secondNumber;
     }
     public double calculate(){
         if(operand.length() < 1){
@@ -36,7 +40,7 @@ public class CalculatorMath {
                 double result = operation.execute();
                 firstNumber = result;
                 secondNumber = 0.0;
-                operand = "";
+                //operand = "";
                 return result;
             }
         }

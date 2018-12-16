@@ -1,8 +1,6 @@
 package com.example.student.kalkulator2;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,16 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView outputResult = null;
     private TextView inputExpression = null;
     private  CalculatorMath calculatorMath = new CalculatorMath();
+    private boolean isFirstNumberEntered = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +42,24 @@ public class MainActivity extends AppCompatActivity {
         String value = ((Button) view).getText().toString();
 //        Toast.makeText(MainActivity.this, value + " func",
 //                Toast.LENGTH_LONG).show();
-        inputExpression.setText(inputExpression.getText() + " " + value + " ");
-        calculatorMath.setNumber();
-        calculatorMath.setOperand(value);
+        if(Character.isDigit(inputExpression.getText().charAt(inputExpression.getText().length() - 1))) {
+            inputExpression.setText(inputExpression.getText() + " " + value + " ");
+            calculatorMath.setNumber();
+            calculatorMath.setOperand(value);
+            if(!isFirstNumberEntered) {
+                buttonEqualsClick(null);
+            }
+            else{
+                isFirstNumberEntered = false;
+            }
+
+        }
     }
     public void buttonClearClick(View view){
         calculatorMath.clear();
         inputExpression.setText("");
         outputResult.setText("");
+        isFirstNumberEntered = true;
     }
     public void buttonEqualsClick(View view){
         calculatorMath.setNumber();
