@@ -45,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
         if(Character.isDigit(inputExpression.getText().charAt(inputExpression.getText().length() - 1))) {
             inputExpression.setText(inputExpression.getText() + " " + value + " ");
             calculatorMath.setNumber();
-            calculatorMath.setOperand(value);
             if(!isFirstNumberEntered) {
                 buttonEqualsClick(null);
             }
             else{
                 isFirstNumberEntered = false;
             }
-
+            calculatorMath.setOperand(value);
         }
     }
     public void buttonClearClick(View view){
