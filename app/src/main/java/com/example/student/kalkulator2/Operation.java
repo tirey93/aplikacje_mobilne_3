@@ -1,10 +1,10 @@
 package com.example.student.kalkulator2;
 
 public abstract class Operation {
-    protected double firstNumber;
-    protected  double secondNumber;
+    protected Double firstNumber = null;
+    protected Double secondNumber = null;
     public Operation(){}
-    public Operation(double firstNumber, double secondNumber){
+    public Operation(Double firstNumber, Double secondNumber){
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }

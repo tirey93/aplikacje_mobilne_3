@@ -133,6 +133,7 @@
                 android:id="@+id/button21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="buttonNumberClick"
                 android:text="." />
 
             <Button
@@ -154,7 +155,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:text="Button" />
+                android:onClick="buttonFunctionClick"
+                android:text="/" />
         </TableRow>
     </TableLayout>
 

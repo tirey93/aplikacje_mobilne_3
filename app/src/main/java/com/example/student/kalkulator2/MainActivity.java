@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView outputResult = null;
     private TextView inputExpression = null;
     private  CalculatorMath calculatorMath = new CalculatorMath();
-    private boolean isFirstNumberEntered = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +44,8 @@ public class MainActivity extends AppCompatActivity {
         if(Character.isDigit(inputExpression.getText().charAt(inputExpression.getText().length() - 1))) {
             inputExpression.setText(inputExpression.getText() + " " + value + " ");
             calculatorMath.setNumber();
-            if(!isFirstNumberEntered) {
+            if(calculatorMath.isAbleToCalculate()) {
                 buttonEqualsClick(null);
-            }
-            else{
-                isFirstNumberEntered = false;
             }
             calculatorMath.setOperand(value);
         }
@@ -58,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
         calculatorMath.clear();
         inputExpression.setText("");
         outputResult.setText("");
-        isFirstNumberEntered = true;
     }
     public void buttonEqualsClick(View view){
         calculatorMath.setNumber();
-        outputResult.setText(String.format("%.2f", calculatorMath.calculate()));
+        Double result = calculatorMath.calculate();
+        if(result != null) {
+            outputResult.setText(String.format("%.2f", result));
+
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

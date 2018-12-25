@@ -3,8 +3,8 @@ package com.example.student.kalkulator2;
 public class CalculatorMath {
     private String operand = "";
     private String buffor = "";
-    private double firstNumber;
-    private double secondNumber;
+    private Double firstNumber = null;
+    private Double secondNumber = null;
 
     public void setOperand(String operand) {
         this.operand = operand;
@@ -13,13 +13,16 @@ public class CalculatorMath {
         buffor += digit;
     }
     public void setNumber() {
-        double numberDbl = 0.0;
+        Double numberDbl = null;
         try{
             numberDbl = Double.parseDouble(buffor);
         }
-        catch (Exception ex){ }
-        if(firstNumber == 0.0 || secondNumber == 0.0) {
-            if (operand.length() < 1 && firstNumber == 0.0) {
+        catch (Exception ex){
+            buffor = "";
+            return;
+        }
+        if(firstNumber == null || secondNumber == null) {
+            if (operand.length() < 1 && firstNumber == null) {
                 firstNumber = numberDbl;
             } else {
                 secondNumber = numberDbl;
@@ -27,28 +30,34 @@ public class CalculatorMath {
         }
         buffor = "";
     }
-    public double getSecondNumber(){
+    public boolean isAbleToCalculate(){
+        if(firstNumber != null && secondNumber != null && operand.length() > 0){
+            return true;
+        }
+        return false;
+    }
+    public Double getSecondNumber(){
         return secondNumber;
     }
-    public double calculate(){
+    public Double calculate(){
         if(operand.length() < 1){
             return firstNumber;
         }
         else {
             Operation operation = createOperation();
             if(operation != null){
-                double result = operation.execute();
+                Double result = operation.execute();
                 firstNumber = result;
-                secondNumber = 0.0;
+                secondNumber = null;
                 //operand = "";
                 return result;
             }
         }
-        return 0.0;
+        return null;
     }
     public void clear(){
-        firstNumber = 0.0;
-        secondNumber = 0.0;
+        firstNumber = null;
+        secondNumber = null;
         operand = "";
     }
     private Operation createOperation(){
@@ -60,6 +69,9 @@ public class CalculatorMath {
         }
         if(operand.equals("*")){
             return new MultiplyOperation(firstNumber, secondNumber);
+        }
+        if(operand.equals("/")){
+            return new DivideOperation(firstNumber, secondNumber);
         }
         return null;
     }
