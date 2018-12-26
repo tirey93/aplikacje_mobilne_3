@@ -9,8 +9,18 @@ public class CalculatorMath {
     public void setOperand(String operand) {
         this.operand = operand;
     }
+    public String getOperand(){
+        return operand;
+    }
     public void createNumber(String digit){
         buffor += digit;
+    }
+    public boolean deleteDigitFromBuffor(){
+        if(buffor.length() > 0){
+            buffor = buffor.substring(0, buffor.length() - 1);
+            return true;
+        }
+        return false;
     }
     public void setNumber() {
         Double numberDbl = null;
@@ -31,8 +41,13 @@ public class CalculatorMath {
         buffor = "";
     }
     public boolean isAbleToCalculate(){
-        if(firstNumber != null && secondNumber != null && operand.length() > 0){
-            return true;
+        if(secondNumber != null && operand.length() > 0){
+            if(operand.equals("sin")) {
+                return true;
+            }
+            if(firstNumber != null){
+                return true;
+            }
         }
         return false;
     }
@@ -72,6 +87,9 @@ public class CalculatorMath {
         }
         if(operand.equals("/")){
             return new DivideOperation(firstNumber, secondNumber);
+        }
+        if(operand.equals("sin")){
+            return new SinOperation(firstNumber, secondNumber);
         }
         return null;
     }

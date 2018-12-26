@@ -144,11 +144,12 @@
                 android:text="0" />
 
             <Button
-                android:id="@+id/button24"
+                android:id="@+id/buttonCSin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:text="Button" />
+                android:onClick="buttonFunctionClick"
+                android:text="sin" />
 
             <Button
                 android:id="@+id/button22"
