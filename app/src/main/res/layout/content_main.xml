@@ -165,31 +165,29 @@
         android:id="@+id/button20"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="@color/colorPrimary"
         android:onClick="buttonClearClick"
         android:text="clr"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button25" />
+        app:layout_constraintEnd_toEndOf="@+id/tableLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button25"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:onClick="buttonEqualsClick"
         android:text="="
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button20"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout3"
         app:layout_constraintVertical_bias="0.0" />
 
