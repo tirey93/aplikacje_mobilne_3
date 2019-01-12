@@ -1,16 +1,25 @@
 package com.example.student.kalkulator2;
 
 public class CalculatorMath {
-    private String operand = "";
+    //private String operand = "";
     private String buffor = "";
     private Double firstNumber = null;
     private Double secondNumber = null;
+    private  Operation operation = null;
 
     public void setOperand(String operand) {
-        this.operand = operand;
+        operation = createOperation(operand);
     }
     public String getOperand(){
-        return operand;
+        if(operation != null){
+            return operation.getOperationSign();
+        }
+        else {
+            return "";
+        }
+    }
+    public Operation getOperation(){
+        return operation;
     }
     public void createNumber(String digit){
         buffor += digit;
@@ -32,7 +41,7 @@ public class CalculatorMath {
             return;
         }
         if(firstNumber == null || secondNumber == null) {
-            if (operand.length() < 1 && firstNumber == null) {
+            if (getOperand().length() < 1 && firstNumber == null) {
                 firstNumber = numberDbl;
             } else {
                 secondNumber = numberDbl;
@@ -41,8 +50,8 @@ public class CalculatorMath {
         buffor = "";
     }
     public boolean isAbleToCalculate(){
-        if(secondNumber != null && operand.length() > 0){
-            if(operand.equals("sin")) {
+        if(secondNumber != null && getOperand().length() > 0){
+            if(getOperand().equals("sin")) {
                 return true;
             }
             if(firstNumber != null){
@@ -55,11 +64,11 @@ public class CalculatorMath {
         return secondNumber;
     }
     public Double calculate(){
-        if(operand.length() < 1){
+        if(getOperand().length() < 1){
             return firstNumber;
         }
         else {
-            Operation operation = createOperation();
+//            Operation operation = createOperation();
             if(operation != null){
                 Double result = operation.execute();
                 firstNumber = result;
@@ -73,9 +82,9 @@ public class CalculatorMath {
     public void clear(){
         firstNumber = null;
         secondNumber = null;
-        operand = "";
+        operation = null;
     }
-    private Operation createOperation(){
+    private Operation createOperation(String operand){
         if(operand.equals("+")){
             return new AddingOperation(firstNumber, secondNumber);
         }

@@ -75,9 +75,12 @@ public class MainActivity extends AppCompatActivity {
                 calculatorMath.setOperand(value);
             }
         }
-        if (value.equals("sin")) {
-            textToInsert = inputExpression.getText() + " " + value + "(";
-            calculatorMath.setOperand(value);
+        Operation operation = calculatorMath.getOperation();
+        if(operation != null) {
+            if (operation.isAdvanced) {
+                textToInsert = inputExpression.getText() + " " + value + "(";
+                calculatorMath.setOperand(value);
+            }
         }
         inputExpression.setText(textToInsert);
     }
