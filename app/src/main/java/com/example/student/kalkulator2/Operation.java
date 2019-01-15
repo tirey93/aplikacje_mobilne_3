@@ -5,6 +5,7 @@ public abstract class Operation {
     protected Double firstNumber = null;
     protected Double secondNumber = null;
     protected boolean isAdvanced = false;
+    protected  boolean isSingleOperarand = false;
     public Operation(){}
     public Operation(Double firstNumber, Double secondNumber){
         this.firstNumber = firstNumber;

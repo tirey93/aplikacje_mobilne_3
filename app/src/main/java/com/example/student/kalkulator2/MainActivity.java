@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
                 if (calculatorMath.isAbleToCalculate()) {
                     buttonEqualsClick(null);
                 }
-                calculatorMath.setOperand(value);
             }
         }
+        calculatorMath.setOperand(value);
         Operation operation = calculatorMath.getOperation();
         if(operation != null) {
             if (operation.isAdvanced) {
-                textToInsert = inputExpression.getText() + " " + value + "(";
+                textToInsert = value + "(" + inputExpression.getText() + " ";
                 calculatorMath.setOperand(value);
             }
         }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Double result = calculatorMath.calculate();
         if(result != null) {
             outputResult.setText(String.format("%.2f", result));
-            if(calculatorMath.getOperand().equals("sin")){
+            if(calculatorMath.getOperation().isAdvanced){
                 inputExpression.setText(inputExpression.getText() + ")");
             }
         }

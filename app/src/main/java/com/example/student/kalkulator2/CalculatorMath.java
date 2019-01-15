@@ -8,7 +8,9 @@ public class CalculatorMath {
     private  Operation operation = null;
 
     public void setOperand(String operand) {
-        operation = createOperation(operand);
+        if(!Character.isDigit(operand.charAt(operand.length() - 1))) {
+            operation = createOperation(operand);
+        }
     }
     public String getOperand(){
         if(operation != null){
@@ -41,7 +43,7 @@ public class CalculatorMath {
             return;
         }
         if(firstNumber == null || secondNumber == null) {
-            if (getOperand().length() < 1 && firstNumber == null) {
+            if (firstNumber == null) {
                 firstNumber = numberDbl;
             } else {
                 secondNumber = numberDbl;
@@ -50,11 +52,11 @@ public class CalculatorMath {
         buffor = "";
     }
     public boolean isAbleToCalculate(){
-        if(secondNumber != null && getOperand().length() > 0){
-            if(getOperand().equals("sin")) {
+        if(firstNumber != null && getOperand().length() > 0){
+            if(getOperation().isSingleOperarand) {
                 return true;
             }
-            if(firstNumber != null){
+            if(secondNumber != null){
                 return true;
             }
         }
@@ -72,11 +74,24 @@ public class CalculatorMath {
             if(operation != null){
                 operation.setFirstNumber(firstNumber);
                 operation.setSecondNumber(secondNumber);
-                Double result = operation.execute();
-                firstNumber = result;
-                secondNumber = null;
-                //operand = "";
-                return result;
+                if(firstNumber != null) {
+                    if(secondNumber != null || operation.isSingleOperarand) {
+                        Double result = operation.execute();
+                        firstNumber = result;
+                        secondNumber = null;
+                        //operand = "";
+                        return result;
+                    }
+                    else{
+                        return secondNumber;
+                    }
+                }
+                else if (firstNumber != null){
+                    return  firstNumber;
+                }
+                else{
+                    return null;
+                }
             }
         }
         return null;
