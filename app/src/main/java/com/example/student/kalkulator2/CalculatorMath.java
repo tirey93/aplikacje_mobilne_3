@@ -70,6 +70,8 @@ public class CalculatorMath {
         else {
 //            Operation operation = createOperation();
             if(operation != null){
+                operation.setFirstNumber(firstNumber);
+                operation.setSecondNumber(secondNumber);
                 Double result = operation.execute();
                 firstNumber = result;
                 secondNumber = null;
