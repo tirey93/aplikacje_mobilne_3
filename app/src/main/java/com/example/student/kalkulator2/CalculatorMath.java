@@ -101,6 +101,9 @@ public class CalculatorMath {
         secondNumber = null;
         operation = null;
     }
+    public void operationClear(){
+        operation = null;
+    }
     private Operation createOperation(String operand){
         if(operand.equals("+")){
             return new AddingOperation(firstNumber, secondNumber);
@@ -116,6 +119,15 @@ public class CalculatorMath {
         }
         if(operand.equals("sin")){
             return new SinOperation(firstNumber, secondNumber);
+        }
+        if(operand.equals("cos")){
+            return new CosOperation(firstNumber, secondNumber);
+        }
+        if(operand.equals("^")){
+            return new PowerOperation(firstNumber, secondNumber);
+        }
+        if(operand.equals("sqrt")){
+            return new SqrtOperation(firstNumber, secondNumber);
         }
         return null;
     }

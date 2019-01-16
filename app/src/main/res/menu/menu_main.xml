@@ -6,9 +6,6 @@
         android:id="@+id/aboutSetting"
         android:title="O programie" />
     <item
-        android:id="@+id/modeSetting"
-        android:title="Tryb podstawowy" />
-    <item
         android:id="@+id/exitSetting"
         android:title="Wyjście" />
 </menu>

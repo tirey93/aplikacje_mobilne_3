@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView outputResult = null;
     private TextView inputExpression = null;
     private  CalculatorMath calculatorMath = new CalculatorMath();
+    private boolean isLandscape = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-
+        //buttonClearClick(null);
+        String inExp = inputExpression.getText().toString();
+        String outRes = outputResult.getText().toString();
         super.onConfigurationChanged(newConfig);
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+
             setContentView(R.layout.landscape);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -48,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
         }
+        outputResult = (TextView) findViewById(R.id.outputResult);
+        inputExpression = (TextView) findViewById(R.id.inputExpression);
+        outputResult.setText(outRes);
+        inputExpression.setText(inExp);
     }
     public void buttonPortrait(View view){
         setContentView(R.layout.activity_main);
@@ -110,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 inputExpression.setText(inputExpression.getText() + ")");
             }
         }
+        calculatorMath.operationClear();
     }
     public  void buttonExitClick(View view){
         System.exit(0);
@@ -133,17 +142,6 @@ public class MainActivity extends AppCompatActivity {
         if( id == R.id.exitSetting){
             buttonExitClick(null);
             return true;
-        }
-        if( id == R.id.modeSetting){
-            Button cButton = (Button)findViewById(R.id.buttonCSin);
-            if(item.getTitle().equals("Tryb rozszerzony")) {
-                item.setTitle("Tryb podstawowy");
-                cButton.setText("sin");
-            }
-            else{
-                item.setTitle("Tryb rozszerzony");
-                cButton.setText("c");
-            }
         }
 
         return super.onOptionsItemSelected(item);

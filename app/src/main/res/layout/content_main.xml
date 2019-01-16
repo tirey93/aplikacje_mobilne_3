@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:onClick="buttonFunctionClick"
-                android:text="sin" />
+                android:text="c" />
 
             <Button
                 android:id="@+id/button22"
